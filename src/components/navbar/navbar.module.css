@@ -17,7 +17,11 @@
     width: 30px;
     height: 30px;
     filter: invert(1);
+    cursor: pointer;
 }
 .navbarContainer p{
+    cursor: pointer;
+}
+.cart p{
     cursor: pointer;
 }

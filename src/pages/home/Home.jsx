@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import styles from "./home.module.css";
 import searchImage from "../../assets/search.png"
+import { useCart } from "../../components/Context/CartItemcontext";
+import toast from "react-hot-toast";
 
 const Home = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
+  const {setCart} = useCart()
 
   useEffect(() => {
     const getItems = async () => {
@@ -18,6 +21,33 @@ const Home = () => {
     };
     getItems();
   }, []);
+
+  const handleAddItem = (item) => {
+    setCart((previous) => {
+      const isItemExists = previous.find((i) => i.id === item.id)
+      if(isItemExists){
+        return previous.map((i) => {
+          if(i.id === item.id){
+            return{
+              ...i,
+              quantity: i.quantity + 1,
+              totalPrice: (i.quantity + 1) * i.price
+            }
+          } 
+        })
+      }else{
+        return[
+          ...previous,
+          {
+            ...item,
+            quantity:1,
+            totalPrice:item.price
+          }
+        ]
+      }
+    })
+    toast.success("Item added to cart.")
+  }
 
   const filteredItems = items
     .filter((item) => item.title.toLowerCase().includes(search.toLowerCase()))
@@ -45,7 +75,7 @@ const Home = () => {
                 <img src={item.images[0]} alt="image" />
                 <h3>${item.price}</h3>
                 <p>{item.title}</p>
-                <div className={styles.addItem}>
+                <div className={styles.addItem} onClick={() => handleAddItem(item)}>
                   <p>+</p>
                 </div>
               </div>
