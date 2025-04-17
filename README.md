@@ -3,8 +3,8 @@
 
 ## 🚀 Live Demo
 
-🔗 **Deployed Site**: 
-📁 **GitHub Repo**: 
+🔗 **Deployed Site**: https://e-commerce-frontend-ratnesh.vercel.app/
+📁 **GitHub Repo**: https://github.com/RatneshMaurya1/E-commerce-Frontend
 
 ---
 
@@ -98,12 +98,12 @@ const firebaseConfig = {
 };
 ```
 
-## 📬 Submission
+## Screenshots
+- Home page
+  ![Screenshot 2025-04-17 144638](https://github.com/user-attachments/assets/56550acd-d506-44d3-b28b-a9d22e93d6ed)
+- Cart page
+  ![Screenshot 2025-04-17 144654](https://github.com/user-attachments/assets/d76b6b89-9019-4c06-a168-888429ec6f81)
 
-- 🔗 **Deployed Site**: 
-- 📂 **GitHub Repo**: 
-
----
 
 ## 👨‍💻 Author
 
