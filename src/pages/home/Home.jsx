@@ -96,7 +96,7 @@ const Home = () => {
               </div>
             ))
           ) : (
-            <p>Loading...</p>
+            <p>No item found</p>
           )}
         </div>
       </div>
