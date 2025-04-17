@@ -2,26 +2,50 @@ import React from 'react'
 import styles from "./cart.module.css"
 import Navbar from '../../components/navbar/Navbar'
 import { useCart } from '../../components/Context/CartItemcontext'
+import toast from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
-    const {cart,setCart} = useCart()
+    const {cart,setCart,setOrder} = useCart()
+    const navigate = useNavigate()
     const handleRemoveItem = (item) => {
         setCart((previous) => {
-            return previous.map((i) =>{
-                if(i.id === item.id){
-                    if(i.quantity > 1){
-                        return{
-                            ...i,
-                            quantity: i.quantity - 1,
-                            totalPrice: (i.quantity - 1) * i.price
-                        }
-                    }else{
-                        return previous.filter((i) => i.id !== item.id)
-                    }
-             
-                }
-            })
-        })
+          const isItemExists = previous.find((i) => i.id === item.id)
+          if(isItemExists && isItemExists.quantity > 1){
+            return previous.map((i) => 
+              i.id == item.id ? {
+                ...i,
+                quantity:i.quantity - 1,
+                totalPrice: (i.quantity -1) * i.price
+              }: i
+            )
+          }else{
+            return previous.filter((i) => i.id !== item.id)
+          }
+        }) 
+    }
+
+    const handleAddItem = (item) => {
+      setCart((previous) => {
+        return previous.map((i) => 
+          i.id === item.id ? {
+            ...i,
+            quantity:i.quantity + 1,
+            totalPrice:(i.quantity + 1) * i.price
+          } : i
+        )
+      })
+    }
+
+    const handleCheckout = () => {
+      if(cart.length > 0){
+        setOrder((prev) => [...prev,...cart])
+        setCart([])
+        toast.success("Order placed successfully")
+        navigate("/order")
+      }else{
+        toast.error("Your cart is empty")
+      }
     }
   return (
     <div className={styles.cartContainer}>
@@ -49,6 +73,13 @@ const Cart = () => {
             </div>
           </div>
         )) : <p>Your cart is empty</p>}
+        <div className={styles.checkout}>
+          <div className={styles.totalPrice}>
+          <p>TotalPrice:</p>
+          <p>${cart.reduce((acc,item) => acc+item.totalPrice ,0)}</p>
+          </div>
+          <button className={styles.checkoutBtn} onClick={handleCheckout}>checkout</button>
+        </div>
       </div>
     </div>
   )

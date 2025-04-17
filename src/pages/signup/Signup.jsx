@@ -21,7 +21,6 @@ const Signup = () => {
     try {
       await createUserWithEmailAndPassword(auth, email, password).then(
         (user) => {
-          console.log(user);
           toast.success("User created successfully");
           setEmail("");
           setPassword("");

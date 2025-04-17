@@ -20,7 +20,6 @@ const Login = () => {
         try {
             await signInWithEmailAndPassword(auth,email,password)
             .then((user) => {
-                console.log(user)
                 toast.success("User Logged in successfully")
                 localStorage.setItem("userId",user.user.uid)
                 setEmail("")

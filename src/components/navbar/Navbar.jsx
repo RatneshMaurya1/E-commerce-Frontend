@@ -15,6 +15,7 @@ const Navbar = () => {
   return (
     <div className={styles.navbarContainer}>
       <p onClick={() => navigate("/")}>Home</p>
+      <p onClick={() => navigate("/order")}>My order</p>
       {localStorage.getItem("userId") ? <p onClick={handleLogout}>Logout</p> : <p onClick={() => navigate("/login")}>Login</p>}
       <div className={styles.cart}>
         <img onClick={() => navigate("/cart")} src={cartImage} alt="cart-image" />

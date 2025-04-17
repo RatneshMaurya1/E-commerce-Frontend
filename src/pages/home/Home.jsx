@@ -4,12 +4,14 @@ import styles from "./home.module.css";
 import searchImage from "../../assets/search.png"
 import { useCart } from "../../components/Context/CartItemcontext";
 import toast from "react-hot-toast";
+import DetailsPopup from "../../components/detailsPopup/DetailsPopup";
 
 const Home = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const {setCart} = useCart()
+  const [isOpen,setIsOpen] = useState(false)
+  const {setCart,setDetails} = useCart()
 
   useEffect(() => {
     const getItems = async () => {
@@ -23,6 +25,10 @@ const Home = () => {
   }, []);
 
   const handleAddItem = (item) => {
+    if(!localStorage.getItem("userId")){
+      toast.error("Please login to continue")
+      return;
+    }
     setCart((previous) => {
       const isItemExists = previous.find((i) => i.id === item.id)
       if(isItemExists){
@@ -34,6 +40,7 @@ const Home = () => {
               totalPrice: (i.quantity + 1) * i.price
             }
           } 
+          return i
         })
       }else{
         return[
@@ -47,6 +54,11 @@ const Home = () => {
       }
     })
     toast.success("Item added to cart.")
+  }
+
+  const handleDetails = (item) => {
+    setIsOpen(true)
+    setDetails(item)
   }
 
   const filteredItems = items
@@ -78,6 +90,9 @@ const Home = () => {
                 <div className={styles.addItem} onClick={() => handleAddItem(item)}>
                   <p>+</p>
                 </div>
+                <div className={styles.details} onClick={() => handleDetails(item)}>
+                  <p>Details</p>
+                </div>
               </div>
             ))
           ) : (
@@ -85,6 +100,10 @@ const Home = () => {
           )}
         </div>
       </div>
+      <DetailsPopup
+      isOpen={isOpen}
+      setIsOpen={setIsOpen}
+      />
     </div>
   );
 };

@@ -1,7 +1,11 @@
-.homeContainer{
+.orderContainer{
     height: 100vh;
     width: 100%;
-
+}
+.orderContainer h2{
+    font-weight: 600;
+    text-align: center;
+    margin-top: 30px;
 }
 .itemsWrapper{
     display: flex;
@@ -58,7 +62,6 @@
     margin-bottom: 30px;
     width: 50%;
     position: relative;
-    outline: none;
 }
 .search > input{
     height: 50px;
@@ -75,53 +78,10 @@
     left: 10px;
     top: 15px;
 }
-.details{
-    position: absolute;
+
+.quantity{
     display: flex;
-    justify-content: center;
     align-items: center;
-    background: #D0D0D0;
-    border-radius: 6px;
-    right: 10px;
-    bottom: 65px;
-    height: 25px;
-    width: 70px;
-    cursor: pointer;
+    justify-content: space-between;
+    padding-right: 10px;
 }
-.details p{
-    font-weight: 500;
-    font-size: 12px;
-    color: #000;
-
-}
-
-.loader {
-    font-size: 1.2rem;
-    color: #555;
-    text-align: center;
-    padding: 2rem;
-  }
-  
-  .loader::after {
-    content: " ";
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    border: 3px solid #999;
-    border-top: 3px solid transparent;
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin-left: 8px;
-  }
-  
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-  
-  @media (max-width:450px){
-    .search{
-        min-width: 200px;
-    }
-  }

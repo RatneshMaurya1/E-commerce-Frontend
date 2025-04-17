@@ -25,3 +25,11 @@
 .cart p{
     cursor: pointer;
 }
+
+@media (max-width:450px){
+    .navbarContainer{
+        justify-content: space-evenly;
+        padding: 0;
+        gap: 0;
+    }
+}
